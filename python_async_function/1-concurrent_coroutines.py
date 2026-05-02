@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
 """
-Module for executing multiple coroutines at the same time.
+Import wait_random from the previous python file and write wait_n.
 """
 import asyncio
 from typing import List
 
+# Use the exact import style requested by the task environment
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Spawns wait_random n times and returns list of delays in ascending order.
+    Spawns wait_random n times with the specified max_delay.
     """
-    tasks = [wait_random(max_delay) for _ in range(n)]
+    tasks = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
     delays = []
-    
+
     for task in asyncio.as_completed(tasks):
         delay = await task
         delays.append(delay)
-        
+
     return delays
