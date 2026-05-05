@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Module for an asynchronous generator.
+Module that contains an asynchronous generator.
 """
 import asyncio
 import random
