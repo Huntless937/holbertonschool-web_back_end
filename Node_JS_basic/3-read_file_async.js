@@ -10,7 +10,6 @@ function countStudents(path) {
 
       const lines = fileContent.split('\n').filter((line) => line.trim() !== '');
 
-      // First line is the header
       const headers = lines[0].split(',');
       const firstnameIndex = headers.indexOf('firstname');
       const fieldIndex = headers.indexOf('field');
@@ -33,8 +32,10 @@ function countStudents(path) {
       console.log(`Number of students: ${studentLines.length}`);
 
       for (const field in fields) {
-        const list = fields[field];
-        console.log(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
+        if (Object.prototype.hasOwnProperty.call(fields, field)) {
+          const list = fields[field];
+          console.log(`Number of students in ${field}: ${list.length}. List: ${list.join(', ')}`);
+        }
       }
 
       resolve();
